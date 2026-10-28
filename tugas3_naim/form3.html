@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Sirkulasi Digital - Form Peminjaman Buku</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: radial-gradient(circle at top left, #e0e7ff 0%, #f8fafc 45%, #fef3c7 100%);
+            min-height: 100vh;
+        }
+        /* Custom styling untuk efek kartu radio & checkbox saat dipilih */
+        .peer:checked ~ .radio-card {
+            border-color: #4f46e5;
+            background-color: #eef2ff;
+            color: #312e81;
+            box-shadow: 0 4px 12px -2px rgba(79, 70, 229, 0.18);
+        }
+        .peer:checked ~ .radio-card .radio-dot {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+        .peer:checked ~ .checkbox-pill {
+            border-color: #4f46e5;
+            background-color: #4f46e5;
+            color: #ffffff;
+            box-shadow: 0 4px 10px -2px rgba(79, 70, 229, 0.25);
+        }
+        .peer:checked ~ .checkbox-pill .check-icon {
+            display: inline-block;
+        }
+        /* Pola tiket sobekan */
+        .ticket-cutout {
+            position: relative;
+        }
+        .ticket-cutout::before,
+        .ticket-cutout::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 24px;
+            height: 24px;
+            background-color: #f1f5f9;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        .ticket-cutout::before {
+            left: -28px;
+        }
+        .ticket-cutout::after {
+            right: -28px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased py-8 px-4 sm:px-6 lg:px-8">
+
+    <!-- Header Navigation / Banner -->
+    <div class="max-w-6xl mx-auto mb-8">
+        <div class="bg-white/80 backdrop-blur-md border border-white/60 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-book-open-reader text-xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">PustakaDigital</h1>
+                        <span class="px-2.5 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-700 rounded-full">v2.4</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500">Portal Layanan Mandiri Peminjaman Koleksi Perpustakaan</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 text-xs sm:text-sm font-medium text-slate-600 bg-slate-100/80 px-4 py-2 rounded-xl">
+                <i class="fa-regular fa-calendar-check text-indigo-600"></i>
+                <span id="currentDateDisplay">Memuat tanggal...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- KOLOM KIRI: FORMULIR HTML (7 Kolom) -->
+        <div class="lg:col-span-7 bg-white rounded-3xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
+            
+            <!-- Header Form -->
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 px-6 py-6 sm:px-8 text-white relative overflow-hidden">
+                <div class="relative z-10 flex items-center justify-between">
+                    <div>
+                        <span class="text-indigo-300 text-xs font-bold uppercase tracking-wider">Formulir Sirkulasi</span>
+                        <h2 class="text-xl sm:text-2xl font-bold mt-1">Registrasi Peminjaman Buku</h2>
+                    </div>
+                    <button type="button" onclick="fillDemoData()" class="text-xs bg-white/10 hover:bg-white/20 text-indigo-100 border border-white/15 px-3.5 py-2 rounded-xl backdrop-blur-sm transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> Isi Contoh Data
+                    </button>
+                </div>
+                <!-- Dekorasi Lingkaran -->
+                <div class="w-40 h-40 bg-indigo-500/20 rounded-full blur-2xl absolute -right-10 -top-10 pointer-events-none"></div>
+            </div>
+
+            <!-- Form Start -->
+            <form id="borrowingForm" class="p-6 sm:p-8 space-y-6">
+                
+                <!-- 1. UNSUR INPUT TYPE="TEXT" -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5">
+                            <i class="fa-solid fa-user-pen"></i> 1. Data Peminjam & Buku (Input Text)
+                        </span>
+                        <span class="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">&lt;input type="text"&gt;</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Nama Lengkap -->
+                        <div>
+                            <label for="nama" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                                Nama Lengkap Peminjam <span class="text-rose-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
+                                    <i class="fa-regular fa-user"></i>
+                                </span>
+                                <input type="text" id="nama" name="nama" required
+                                    placeholder="Contoh: Nadia Putri Pratama"
+                                    class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600 transition">
+                            </div>
+                        </div>
+
+                        <!-- Nomor ID Anggota -->
+                        <div>
+                            <label for="id_anggota" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                                Nomor ID Anggota / NIM / NIS <span class="text-rose-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
+                                    <i class="fa-regular fa-id-card"></i>
+                                </span>
+                                <input type="text" id="id_anggota" name="id_anggota" required
+                                    placeholder="Contoh: LIB-2026-089"
+                                    class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600 transition font-mono">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Judul Buku -->
+                    <div>
+                        <label for="judul_buku" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                            Judul Buku & Kode Koleksi <span class="text-rose-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
+                                <i class="fa-solid fa-book"></i>
+                            </span>
+                            <input type="text" id="judul_buku" name="judul_buku" required
+                                placeholder="Masukkan judul buku lengkap yang ingin dipinjam..."
+                                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600 transition">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. UNSUR INPUT TYPE="RADIO" -->
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5">
+                            <i class="fa-solid fa-id-badge"></i> 2. Status Keanggotaan (Radio Button)
+                        </span>
+                        <span class="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">&lt;input type="radio"&gt;</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <!-- Opsi Radio 1 -->
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="status" value="Pelajar / Mahasiswa" class="peer sr-only" checked required>
+                            <div class="radio-card p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-slate-100/80 transition flex items-center gap-3">
+                                <span class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                                </span>
+                                <div>
+                                    <p class="text-xs font-bold">Pelajar / Mahasiswa</p>
+                                    <p class="text-[11px] text-slate-500">Maks. 3 Buku</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- Opsi Radio 2 -->
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="status" value="Dosen / Guru" class="peer sr-only">
+                            <div class="radio-card p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-slate-100/80 transition flex items-center gap-3">
+                                <span class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                                </span>
+                                <div>
+                                    <p class="text-xs font-bold">Dosen / Guru</p>
+                                    <p class="text-[11px] text-slate-500">Maks. 5 Buku</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- Opsi Radio 3 -->
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="status" value="Anggota Umum" class="peer sr-only">
+                            <div class="radio-card p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-slate-100/80 transition flex items-center gap-3">
+                                <span class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                                </span>
+                                <div>
+                                    <p class="text-xs font-bold">Anggota Umum</p>
+                                    <p class="text-[11px] text-slate-500">Maks. 2 Buku</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 3. UNSUR INPUT TYPE="CHECKBOX" -->
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5">
+                            <i class="fa-solid fa-tags"></i> 3. Kategori / Genre Buku (Checkbox)
+                        </span>
+                        <span class="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">&lt;input type="checkbox"&gt;</span>
+                    </div>
+                    <p class="text-xs text-slate-500">Pilih satu atau lebih label kategori yang sesuai dengan buku:</p>
+
+                    <div class="flex flex-wrap gap-2.5">
+                        <!-- Checkbox 1 -->
+                        <label class="cursor-pointer select-none">
+                            <input type="checkbox" name="kategori" value="Sains & Teknologi" class="peer sr-only" checked>
+                            <span class="checkbox-pill inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 text-xs font-semibold hover:border-indigo-300 transition">
+                                <i class="fa-solid fa-microchip text-[11px]"></i>
+                                Sains & Teknologi
+                                <i class="fa-solid fa-check check-icon hidden text-[10px] ml-0.5"></i>
+                            </span>
+                        </label>
+
+                        <!-- Checkbox 2 -->
+                        <label class="cursor-pointer select-none">
+                            <input type="checkbox" name="kategori" value="Fiksi & Sastra" class="peer sr-only">
+                            <span class="checkbox-pill inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 text-xs font-semibold hover:border-indigo-300 transition">
+                                <i class="fa-solid fa-feather-pointed text-[11px]"></i>
+                                Fiksi & Sastra
+                                <i class="fa-solid fa-check check-icon hidden text-[10px] ml-0.5"></i>
+                            </span>
+                        </label>
+
+                        <!-- Checkbox 3 -->
+                        <label class="cursor-pointer select-none">
+                            <input type="checkbox" name="kategori" value="Sejarah & Budaya" class="peer sr-only">
+                            <span class="checkbox-pill inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 text-xs font-semibold hover:border-indigo-300 transition">
+                                <i class="fa-solid fa-landmark text-[11px]"></i>
+                                Sejarah & Budaya
+                                <i class="fa-solid fa-check check-icon hidden text-[10px] ml-0.5"></i>
+                            </span>
+                        </label>
+
+                        <!-- Checkbox 4 -->
+                        <label class="cursor-pointer select-none">
+                            <input type="checkbox" name="kategori" value="Bisnis & Ekonomi" class="peer sr-only">
+                            <span class="checkbox-pill inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 text-xs font-semibold hover:border-indigo-300 transition">
+                                <i class="fa-solid fa-chart-line text-[11px]"></i>
+                                Bisnis & Ekonomi
+                                <i class="fa-solid fa-check check-icon hidden text-[10px] ml-0.5"></i>
+                            </span>
+                        </label>
+
+                        <!-- Checkbox 5 -->
+                        <label class="cursor-pointer select-none">
+                            <input type="checkbox" name="kategori" value="Referensi Akademik" class="peer sr-only">
+                            <span class="checkbox-pill inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 text-xs font-semibold hover:border-indigo-300 transition">
+                                <i class="fa-solid fa-graduation-cap text-[11px]"></i>
+                                Referensi Akademik
+                                <i class="fa-solid fa-check check-icon hidden text-[10px] ml-0.5"></i>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 4. UNSUR SELECT (DROPDOWN) -->
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5">
+                            <i class="fa-regular fa-clock"></i> 4. Durasi Peminjaman (Select Dropdown)
+                        </span>
+                        <span class="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">&lt;select&gt;</span>
+                    </div>
+
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
+                            <i class="fa-solid fa-calendar-day"></i>
+                        </span>
+                        <select id="durasi" name="durasi" required
+                            class="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600 transition appearance-none cursor-pointer">
+                            <option value="" disabled>-- Pilih Durasi Peminjaman --</option>
+                            <option value="3">3 Hari (Pinjaman Kilat / Baca Singkat)</option>
+                            <option value="7" selected>7 Hari (1 Minggu - Standar Reguler)</option>
+                            <option value="14">14 Hari (2 Minggu - Tugas Akhir / Riset)</option>
+                            <option value="30">30 Hari (1 Bulan - Khusus Dosen / Peneliti)</option>
+                        </select>
+                        <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 pointer-events-none">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 5. UNSUR TEXTAREA -->
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5">
+                            <i class="fa-regular fa-comment-dots"></i> 5. Alamat / Catatan Kondisi Buku (Textarea)
+                        </span>
+                        <span class="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">&lt;textarea&gt;</span>
+                    </div>
+
+                    <div>
+                        <textarea id="catatan" name="catatan" rows="3"
+                            placeholder="Tuliskan alamat domisili aktif atau catatan kondisi fisik buku saat dipinjam (misal: sampul sedikit terlipat, dilengkapi CD pendamping)..."
+                            class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600 transition resize-y"></textarea>
+                    </div>
+                </div>
+
+                <!-- 6. UNSUR BUTTON -->
+                <div class="pt-4 border-t border-slate-100">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5">
+                            <i class="fa-solid fa-paper-plane"></i> 6. Tombol Aksi (Button)
+                        </span>
+                        <span class="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">&lt;button&gt;</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button type="submit"
+                            class="flex-1 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 active:scale-[0.99] transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-solid fa-check-circle"></i>
+                            Ajukan Peminjaman Buku
+                        </button>
+                        <button type="reset"
+                            class="sm:w-auto bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 font-semibold py-3 px-5 rounded-xl active:scale-[0.99] transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            Reset Form
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- KOLOM KANAN: LIVE PREVIEW STRUK PEMINJAMAN & RIWAYAT (5 Kolom) -->
+        <div class="lg:col-span-5 space-y-6 sticky top-6">
+            
+            <!-- Kartu Struk Peminjaman Live -->
+            <div class="bg-slate-100 p-4 sm:p-5 rounded-3xl border border-slate-200/80 shadow-inner">
+                <div class="flex items-center justify-between mb-3 px-1">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Live Preview Kartu Peminjaman
+                    </span>
+                    <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-100">Otomatis</span>
+                </div>
+
+                <!-- Desain Tiket / Kartu Perpustakaan -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200/90 overflow-hidden">
+                    <!-- Kepala Tiket -->
+                    <div class="bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-4 text-white flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-bookmark text-amber-300 text-lg"></i>
+                            <div>
+                                <h3 class="text-sm font-bold leading-tight">KARTU SIRKULASI BUKU</h3>
+                                <p class="text-[11px] text-indigo-100">Bukti Peminjaman Koleksi Resmi</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] uppercase tracking-widest text-indigo-200 block">No. Transaksi</span>
+                            <span id="previewTrx" class="font-mono text-xs font-bold bg-white/15 px-2 py-0.5 rounded">#TRX-8821</span>
+                        </div>
+                    </div>
+
+                    <!-- Isi Tiket -->
+                    <div class="p-5 space-y-4">
+                        <div class="flex items-start justify-between gap-4 border-b border-slate-100 pb-3.5">
+                            <div>
+                                <p class="text-[11px] uppercase font-bold text-slate-400">Nama Peminjam</p>
+                                <p id="previewNama" class="text-sm font-bold text-slate-800 mt-0.5">Belum diisi...</p>
+                                <span id="previewStatus" class="inline-block mt-1 text-[11px] font-semibold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-md">
+                                    Pelajar / Mahasiswa
+                                </span>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <p class="text-[11px] uppercase font-bold text-slate-400">ID Anggota</p>
+                                <p id="previewId" class="text-xs font-mono font-bold text-slate-700 mt-0.5 bg-slate-100 px-2 py-1 rounded">-</p>
+                            </div>
+                        </div>
+
+                        <!-- Detail Buku -->
+                        <div>
+                            <p class="text-[11px] uppercase font-bold text-slate-400">Judul Koleksi Buku</p>
+                            <p id="previewJudul" class="text-sm font-bold text-indigo-950 mt-0.5 leading-snug">Belum ada buku dipilih...</p>
+                            
+                            <!-- Kategori Badges -->
+                            <div id="previewKategori" class="flex flex-wrap gap-1.5 mt-2">
+                                <span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-medium">Sains & Teknologi</span>
+                            </div>
+                        </div>
+
+                        <!-- Garis Sobekan Tiket -->
+                        <div class="ticket-cutout border-t-2 border-dashed border-slate-200 my-4"></div>
+
+                        <!-- Tanggal Pinjam & Kembali -->
+                        <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-slate-400">Durasi Pinjam</p>
+                                <p id="previewDurasi" class="text-xs font-bold text-slate-700 mt-0.5">7 Hari (1 Minggu)</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-slate-400">Batas Pengembalian</p>
+                                <p id="previewJatuhTempo" class="text-xs font-bold text-emerald-600 mt-0.5">-</p>
+                            </div>
+                        </div>
+
+                        <!-- Catatan -->
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-slate-400">Alamat / Catatan Kondisi</p>
+                            <p id="previewCatatan" class="text-xs text-slate-600 italic mt-0.5 line-clamp-2">Tidak ada catatan tambahan.</p>
+                        </div>
+                    </div>
+
+                    <!-- Footer Barcode Simulasi -->
+                    <div class="bg-slate-50 px-5 py-3 border-t border-slate-100 flex items-center justify-between">
+                        <div class="flex items-center gap-1 text-slate-400 text-xs">
+                            <i class="fa-solid fa-barcode text-2xl text-slate-700"></i>
+                            <i class="fa-solid fa-barcode text-2xl text-slate-700"></i>
+                            <span class="text-[10px] font-mono ml-2 text-slate-400">VALID-PASS</span>
+                        </div>
+                        <span class="text-[11px] text-slate-400 font-medium">Harap bawa kartu saat pengembalian</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daftar Buku yang Baru Diajukan -->
+            <div class="bg-white rounded-3xl p-5 shadow-md border border-slate-100">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-indigo-600"></i>
+                        Riwayat Pengajuan Sesi Ini
+                    </h3>
+                    <span id="counterBadge" class="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">0</span>
+                </div>
+                <div id="submittedList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1">
+                    <div id="emptyState" class="text-center py-6 text-slate-400 text-xs">
+                        <i class="fa-regular fa-folder-open text-2xl mb-1.5 block text-slate-300"></i>
+                        Belum ada data peminjaman yang dikirim.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Toast Notification Pop-up -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3.5 border border-slate-700">
+            <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400">Berhasil Terkirim</h4>
+                <p id="toastMessage" class="text-xs text-slate-200 mt-0.5">Data peminjaman buku telah dicatat!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Interaktif untuk Live Preview & Submit -->
+    <script>
+        const form = document.getElementById('borrowingForm');
+        const inputNama = document.getElementById('nama');
+        const inputId = document.getElementById('id_anggota');
+        const inputJudul = document.getElementById('judul_buku');
+        const selectDurasi = document.getElementById('durasi');
+        const inputCatatan = document.getElementById('catatan');
+
+        const previewNama = document.getElementById('previewNama');
+        const previewId = document.getElementById('previewId');
+        const previewJudul = document.getElementById('previewJudul');
+        const previewStatus = document.getElementById('previewStatus');
+        const previewKategori = document.getElementById('previewKategori');
+        const previewDurasi = document.getElementById('previewDurasi');
+        const previewJatuhTempo = document.getElementById('previewJatuhTempo');
+        const previewCatatan = document.getElementById('previewCatatan');
+        const previewTrx = document.getElementById('previewTrx');
+
+        let submissionCount = 0;
+
+        // Format Tanggal Bahasa Indonesia
+        function formatTanggalIndo(date) {
+            return new Intl.DateTimeFormat('id-ID', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            }).format(date);
+        }
+
+        // Set Tanggal Hari Ini di Header
+        const today = new Date();
+        document.getElementById('currentDateDisplay').textContent = new Intl.DateTimeFormat('id-ID', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        }).format(today);
+
+        // Fungsi Update Live Preview Kartu Peminjaman
+        function updateLivePreview() {
+            previewNama.textContent = inputNama.value.trim() || 'Belum diisi...';
+            previewId.textContent = inputId.value.trim() || '-';
+            previewJudul.textContent = inputJudul.value.trim() || 'Belum ada buku dipilih...';
+            previewCatatan.textContent = inputCatatan.value.trim() || 'Tidak ada catatan tambahan.';
+
+            // Radio Status
+            const selectedStatus = document.querySelector('input[name="status"]:checked');
+            if (selectedStatus) {
+                previewStatus.textContent = selectedStatus.value;
+            }
+
+            // Checkbox Kategori
+            const checkedBoxes = Array.from(document.querySelectorAll('input[name="kategori"]:checked'));
+            previewKategori.innerHTML = '';
+            if (checkedBoxes.length > 0) {
+                checkedBoxes.forEach(cb => {
+                    const badge = document.createElement('span');
+                    badge.className = 'text-[11px] bg-indigo-50 text-indigo-700 border border-indigo-100 px-2 py-0.5 rounded-md font-semibold';
+                    badge.textContent = cb.value;
+                    previewKategori.appendChild(badge);
+                });
+            } else {
+                previewKategori.innerHTML = '<span class="text-[11px] text-rose-500 italic">Belum memilih kategori</span>';
+            }
+
+            // Select Durasi & Hitung Tanggal Kembali
+            const durasiHari = parseInt(selectDurasi.value || '7', 10);
+            const durasiText = selectDurasi.options[selectDurasi.selectedIndex]?.text.split('(')[0].trim() || '7 Hari';
+            previewDurasi.textContent = `${durasiText}`;
+
+            const dueDate = new Date();
+            dueDate.setDate(today.getDate() + durasiHari);
+            previewJatuhTempo.textContent = formatTanggalIndo(dueDate);
+        }
+
+        // Pasang Event Listener ke semua input form
+        form.addEventListener('input', updateLivePreview);
+        form.addEventListener('change', updateLivePreview);
+
+        // Event saat tombol Reset ditekan
+        form.addEventListener('reset', () => {
+            setTimeout(() => {
+                previewTrx.textContent = '#TRX-' + Math.floor(1000 + Math.random() * 9000);
+                updateLivePreview();
+            }, 20);
+        });
+
+        // Fungsi Tombol "Isi Contoh Data"
+        function fillDemoData() {
+            inputNama.value = 'Rizky Pratama Putra';
+            inputId.value = 'NIM-24019827';
+            inputJudul.value = 'Clean Code: A Handbook of Agile Software Craftsmanship';
+            selectDurasi.value = '14';
+            inputCatatan.value = 'Jl. Merdeka Raya No. 45, Bandung. Buku dalam kondisi sangat baik dan bersampul plastik.';
+            
+            // Pilih radio
+            const radios = document.querySelectorAll('input[name="status"]');
+            radios[0].checked = true;
+
+            // Pilih beberapa checkbox
+            const checkboxes = document.querySelectorAll('input[name="kategori"]');
+            checkboxes.forEach((cb, idx) => {
+                cb.checked = (idx === 0 || idx === 4);
+            });
+
+            updateLivePreview();
+        }
+
+        // Fungsi Menampilkan Toast Notification
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        // Event saat Form di-Submit
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const checkedCategories = Array.from(document.querySelectorAll('input[name="kategori"]:checked')).map(c => c.value);
+            if (checkedCategories.length === 0) {
+                showToast('Mohon pilih minimal 1 kategori buku!');
+                return;
+            }
+
+            submissionCount++;
+            document.getElementById('counterBadge').textContent = submissionCount;
+            const emptyState = document.getElementById('emptyState');
+            if (emptyState) emptyState.remove();
+
+            // Buat item riwayat baru
+            const listContainer = document.getElementById('submittedList');
+            const item = document.createElement('div');
+            item.className = 'p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between gap-3 text-xs';
+            item.innerHTML = `
+                <div class="min-w-0">
+                    <p class="font-bold text-slate-800 truncate">${inputJudul.value}</p>
+                    <p class="text-slate-500 truncate">${inputNama.value} • <span class="font-mono">${inputId.value}</span></p>
+                </div>
+                <span class="shrink-0 bg-emerald-100 text-emerald-700 font-bold px-2.5 py-1 rounded-lg">
+                    ${selectDurasi.value} Hari
+                </span>
+            `;
+            listContainer.prepend(item);
+
+            showToast(`Peminjaman "${inputJudul.value}" berhasil diajukan!`);
+            previewTrx.textContent = '#TRX-' + Math.floor(1000 + Math.random() * 9000);
+        });
+
+        // Inisialisasi awal
+        updateLivePreview();
+    </script>
+</body>
+</html>
