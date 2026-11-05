@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animasi CSS Marquee dan Bulat</title>
+    <style>
+        /* Mengatur posisi seluruh halaman agar berada di tengah */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Konfigurasi Lingkaran Maroon */
+        .lingkaran {
+            width: 150px;
+            height: 150px;
+            background-color: maroon;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            /* Menjalankan animasi gerak ke kiri dan kanan */
+            /* alternate membuat animasi berbalik arah setelah selesai */
+            animation: gerakKiriKanan 2s ease-in-out infinite alternate;
+        }
+
+        /* Keyframes untuk Animasi Lingkaran */
+        @keyframes gerakKiriKanan {
+            0% {
+                transform: translateX(-150px); /* Posisi mentok kiri */
+            }
+            100% {
+                transform: translateX(150px);  /* Posisi mentok kanan */
+            }
+        }
+
+        /* Konfigurasi Latar Belakang Biru Muda */
+        .marquee-container {
+            width: 100%;
+            background-color: lightblue;
+            padding: 15px 0;
+            overflow: hidden; 
+            white-space: nowrap;
+        }
+
+        /* Konfigurasi Teks Biru */
+        .teks-marquee {
+            display: inline-block;
+            color: blue;
+            font-size: 32px;
+            font-weight: bold;
+            animation: bergerak 12s linear infinite;
+        }
+
+        /* Keyframes untuk Animasi Teks Berjalan */
+        @keyframes bergerak {
+            0% {
+                transform: translateX(100vw);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Elemen Bulat -->
+    <div class="lingkaran"></div>
+
+    <!-- Elemen Banner Animasi -->
+    <div class="marquee-container">
+        <div class="teks-marquee">Assalamu'alaikum Selamat Belajar Web Design.</div>
+    </div>
+
+</body>
+</html>
