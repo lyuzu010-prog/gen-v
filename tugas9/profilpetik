@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesantren PeTIK 2 Jombang</title>
+    <!-- Menggunakan font profesional Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0f766e; /* Teal gelap elegan */
+            --secondary-color: #0284c7; /* Biru teknologi */
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            margin-top: 70px;
+            height: 80vh;
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.9), rgba(2, 132, 199, 0.8)), 
+                        url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--white);
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* --- Sections --- */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Tentang Kami --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            text-align: justify;
+        }
+
+        .about-image {
+            background-color: #e2e8f0;
+            height: 350px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* --- Program Pendidikan --- */
+        .bg-gray {
+            background-color: var(--white);
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .program-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .program-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .program-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .program-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 1rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Disembunyikan di mobile untuk kesederhanaan, bisa ditambah hamburger menu nantinya */
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">PeTIK 2 <span>Jombang</span></a>
+            <ul class="nav-links">
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#tentang">Profil</a></li>
+                <li><a href="#program">Program</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Hero -->
+    <header class="hero" id="beranda">
+        <div class="hero-content">
+            <h1>Mencetak Santri Programmer Masa Depan</h1>
+            <p>Lembaga Pendidikan Pesantren Teknologi Informasi dan Komunikasi yang memadukan akhlak mulia dan keahlian rekayasa perangkat lunak.</p>
+            <a href="#program" class="btn">Lihat Program Kami</a>
+        </div>
+    </header>
+
+    <!-- Section Tentang -->
+    <section id="tentang">
+        <h2 class="section-title">Profil Pesantren</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p><strong>Pesantren PeTIK 2 Jombang</strong> hadir sebagai solusi pendidikan modern yang menggabungkan nilai-nilai kepesantrenan dengan keterampilan profesional di bidang Teknologi Informasi.</p>
+                <p>Kami membina para santri tidak hanya untuk mahir dalam membaca kitab kuning dan menjaga adab Islami, tetapi juga untuk menjadi developer handal yang siap bersaing di industri teknologi global.</p>
+                <p>Dengan fasilitas laboratorium modern dan kurikulum yang selalu diperbarui mengikuti standar industri, kami berkomitmen melahirkan generasi programmer yang berakhlak karimah.</p>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <!-- Section Program -->
+    <div class="bg-gray" id="program">
+        <div class="program-container">
+            <h2 class="section-title">Program Unggulan</h2>
+            <div class="program-grid">
+                
+                <!-- Kartu Program 1 -->
+                <div class="program-card">
+                    <div class="program-icon">💻</div>
+                    <h3>Pengembangan Perangkat Lunak (PPL)</h3>
+                    <p>Program intensif mencetak Software Engineer. Mempelajari fundamental OOP, arsitektur web modern (Python, Flask, JS), manajemen database, hingga metodologi SDLC (Scrum, Agile).</p>
+                </div>
+
+                <!-- Kartu Program 2 -->
+                <div class="program-card">
+                    <div class="program-icon">📖</div>
+                    <h3>Kajian Keislaman & Tahfidz</h3>
+                    <p>Pendidikan karakter dan kerohanian santri melalui hafalan Al-Qur'an, pembiasaan ibadah sunnah, serta kajian kitab kuning untuk membentuk akhlak yang mulia.</p>
+                </div>
+
+                <!-- Kartu Program 3 -->
+                <div class="program-card">
+                    <div class="program-icon">🚀</div>
+                    <h3>Inkubasi Portofolio Industri</h3>
+                    <p>Pendampingan pembuatan proyek nyata (Real-world projects) berbasis studi kasus industri untuk mempersiapkan santri terjun langsung sebagai profesional atau technopreneur.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="kontak">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>PeTIK 2 Jombang</h4>
+                <p>Lembaga Pendidikan Teknologi Informasi dan Komunikasi Berbasis Pesantren.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Kontak Kami</h4>
+                <p>📍 Jombang, Jawa Timur, Indonesia</p>
+                <p>📧 info@petik2jombang.ac.id</p>
+            </div>
+            <div class="footer-col">
+                <h4>Program</h4>
+                <p>PPL (Pengembangan Perangkat Lunak)</p>
+                <p>Kajian Kepesantrenan</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Pesantren PeTIK 2 Jombang. Didesain dengan profesionalitas.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
