@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // --- TUGAS 1: FOR LOOP ---
+    
+    // // 1. Angka 1 sampai 10
+    // for (let i = 1; i <= 10; i++) {
+    //     console.log(i);
+    // }
+
+    // // 2. Hitungan mundur 5 sampai 1
+    // for (let j = 5; j >= 1; j--) {
+    //     console.log(j);
+    // }
+    // console.log("mulai!");
+
+
+    // --- TUGAS 2: WHILE LOOP ---
+    
+    // // 1. Variable angka dan total
+    // let angka = 1;
+    // let total = 0;
+
+    // 2. Perulangan while
+    // // while (angka <= 5) {
+    // //     total += angka;
+    // //     angka++; 
+    // }
+
+    // 3. Cetak hasil akhir
+    // console.log(total);
+
+    // // 1. Buat variable angka dan total
+    //     let angka = 1;
+    //     let total = 0;
+
+    //     2. Perulangan while selama angka <= 5
+    //     while (angka <= 5) {
+    //         total = total + angka; // Bisa juga ditulis: total += angka;
+    //         angka++;               // Tambahkan 1 ke angka setiap putaran
+    //     }
+
+    //     // 3. Cetak hasil akhir di luar blok perulangan
+    //     console.log("Total akumulasi:", total);
+
+//         // Deklarasikan variabel di sini agar dikenali oleh JavaScript
+// let angka = 1; 
+// let total = 0;
+
+// while (angka <= 5) {
+//     total += angka;
+//     angka++; 
+// }
+
+// console.log("Total akumulasi:", total);
+
+    </script>
+</body>
+</html>
+</script>
+</body>
+</html>
