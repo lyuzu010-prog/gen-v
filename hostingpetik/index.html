@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PeTIK II Jombang | Pesantren yang Melahirkan Santri dengan Kemampuan IT</title>
+<meta name="description" content="Pesantren Teknologi Informasi dan Komunikasi (PeTIK) II Jombang di bawah naungan YBM PLN. Pendidikan IT gratis selama satu tahun: Digital Marketing dan Pengembangan Perangkat Lunak.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --cream: #f3eddf;
+    --paper: #fbf8f1;
+    --ink: #17201b;
+    --green: #1d5a43;
+    --green-d: #123b2c;
+    --orange: #ff6b35;
+    --yellow: #ffc933;
+    --muted: #5b6760;
+    --sh: 6px 6px 0 var(--ink);
+    --sh-lg: 10px 10px 0 var(--ink);
+    --sh-sm: 3px 3px 0 var(--ink);
+    --bd: 2.5px solid var(--ink);
+    --head: 'Bricolage Grotesque', 'Figtree', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+    font-family: 'Figtree', system-ui, sans-serif;
+    color: var(--ink);
+    background-color: var(--cream);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E");
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+.container { width: 90%; max-width: 1200px; margin: 0 auto; }
+section { padding: 110px 0; position: relative; }
+
+/* SCROLL PROGRESS */
+.progress { position: fixed; top: 0; left: 0; height: 5px; width: 100%; background: var(--orange); transform-origin: left; transform: scaleX(0); z-index: 200; }
+
+/* TYPE */
+.tag {
+    display: inline-block; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 14px; background: var(--yellow); border: var(--bd); border-radius: 999px; box-shadow: var(--sh-sm);
+    transform: rotate(-2deg); margin-bottom: 22px;
+}
+.title { font-family: var(--head); font-weight: 800; font-size: clamp(34px, 5vw, 60px); line-height: 1.05; letter-spacing: -1.5px; }
+.lead { font-size: 17px; color: var(--muted); max-width: 600px; margin-top: 18px; }
+.center { text-align: center; }
+.center .lead { margin-left: auto; margin-right: auto; }
+.mark { background: linear-gradient(transparent 60%, var(--yellow) 60% 94%, transparent 94%) no-repeat 0 0 / 0% 100%; transition: background-size .9s cubic-bezier(.2,.8,.2,1) .35s; padding: 0 .08em; }
+.show .mark, .mark.on { background-size: 100% 100%; }
+
+/* BUTTONS (timbul) */
+.btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; font: 700 15px 'Figtree', sans-serif;
+    background: var(--orange); color: var(--ink); border: var(--bd); border-radius: 14px; box-shadow: var(--sh); cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .2s;
+}
+.btn:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+.btn:active { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--ink); }
+.btn .arr { transition: transform .25s; }
+.btn:hover .arr { transform: translateX(5px); }
+.btn-light { background: var(--paper); }
+.btn-yellow { background: var(--yellow); }
+.btn-green { background: var(--green); color: #fff; }
+
+/* NAVBAR */
+.navbar { position: sticky; top: 0; z-index: 100; background: var(--paper); border-bottom: var(--bd); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--head); font-weight: 800; font-size: 21px; letter-spacing: -.5px; }
+.brand-mark { width: 40px; height: 40px; background: var(--green); color: var(--yellow); display: grid; place-items: center; border: var(--bd); border-radius: 12px; box-shadow: var(--sh-sm); transform: rotate(-6deg); transition: transform .4s; font-size: 20px; }
+.brand:hover .brand-mark { transform: rotate(8deg) scale(1.08); }
+.brand small { display: block; font: 600 10.5px 'Figtree'; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: -3px; }
+.nav-menu { display: flex; align-items: center; gap: 6px; }
+.nav-menu a:not(.btn) { font-weight: 600; font-size: 14.5px; padding: 8px 14px; border-radius: 10px; position: relative; }
+.nav-menu a:not(.btn)::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 4px; height: 3px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .3s; border-radius: 2px; }
+.nav-menu a:not(.btn):hover::after { transform: scaleX(1); }
+.nav-menu .btn { padding: 10px 18px; font-size: 14px; box-shadow: var(--sh-sm); margin-left: 8px; }
+.menu-btn { display: none; background: var(--yellow); border: var(--bd); border-radius: 10px; width: 44px; height: 44px; font-size: 20px; cursor: pointer; box-shadow: var(--sh-sm); }
+
+/* HERO */
+.hero { padding: 70px 0 90px; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 60px; align-items: center; }
+.hero .chip { display: inline-flex; gap: 10px; align-items: center; background: var(--paper); border: var(--bd); border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 700; box-shadow: var(--sh-sm); margin-bottom: 28px; animation: pop .7s .1s both cubic-bezier(.3,1.5,.5,1); }
+.hero .chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--green); }
+.hero h1 { font-family: var(--head); font-weight: 800; font-size: clamp(44px, 6.6vw, 88px); line-height: .98; letter-spacing: -3px; }
+.hero h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-right: .22em; }
+.hero h1 .w > span { display: inline-block; transform: translateY(110%); animation: rise .9s calc(var(--i) * .09s + .2s) both cubic-bezier(.2,.8,.2,1); }
+.hero h1 .mark { animation: hl 1s 1.3s both; }
+@keyframes rise { to { transform: translateY(0); } }
+@keyframes hl { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+@keyframes pop { from { opacity: 0; transform: scale(.7) rotate(-6deg); } to { opacity: 1; transform: none; } }
+.hero p.sub { margin-top: 28px; font-size: 18px; max-width: 540px; color: #3a463f; animation: fadeup .8s 1s both; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 36px; animation: fadeup .8s 1.15s both; }
+@keyframes fadeup { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+.hero-visual { position: relative; animation: fadeup 1s .5s both; }
+.photo-frame { background: var(--paper); border: var(--bd); border-radius: 24px; box-shadow: var(--sh-lg); padding: 14px; transform: rotate(2.5deg); transition: transform .4s; }
+.photo-frame:hover { transform: rotate(0deg) scale(1.02); }
+.photo { height: 400px; border-radius: 14px; overflow: hidden; border: var(--bd); background: repeating-linear-gradient(45deg, var(--green) 0 14px, var(--green-d) 14px 28px); }
+.photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s; }
+.photo-frame:hover .photo img { transform: scale(1.08); }
+.photo-cap { display: flex; justify-content: space-between; padding: 12px 6px 2px; font-size: 13px; font-weight: 700; }
+.sticker { position: absolute; font-family: var(--head); font-weight: 800; border: var(--bd); box-shadow: var(--sh-sm); border-radius: 14px; padding: 9px 16px; font-size: 15px; z-index: 3; transform: translate(calc(var(--mx, 0) * var(--k)), calc(var(--my, 0) * var(--k))) rotate(var(--r)); transition: transform .25s ease-out; }
+.sticker.s1 { top: -22px; left: -26px; background: var(--yellow); --r: -8deg; --k: 18px; }
+.sticker.s2 { bottom: 70px; left: -44px; background: var(--orange); --r: 6deg; --k: -14px; }
+.sticker.s3 { top: 130px; right: -28px; background: var(--green); color: #fff; --r: 5deg; --k: 22px; }
+.spin { position: absolute; right: -34px; bottom: -44px; width: 140px; height: 140px; z-index: 4; }
+.spin svg { width: 100%; height: 100%; animation: rot 16s linear infinite; }
+.spin .core { position: absolute; inset: 30px; border-radius: 50%; background: var(--yellow); border: var(--bd); display: grid; place-items: center; font-family: var(--head); font-weight: 800; font-size: 28px; box-shadow: var(--sh-sm); }
+@keyframes rot { to { transform: rotate(360deg); } }
+
+/* MARQUEE */
+.marquee { background: var(--green-d); color: var(--cream); border-block: var(--bd); overflow: hidden; padding: 18px 0; transform: rotate(-1.2deg); margin: 0 -2%; position: relative; z-index: 4; }
+.marquee-track { display: flex; width: max-content; animation: scroll 32s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee span { font-family: var(--head); font-weight: 700; font-size: 26px; padding: 0 28px; display: inline-flex; align-items: center; gap: 56px; white-space: nowrap; letter-spacing: -.3px; }
+.marquee span::after { content: "✦"; color: var(--yellow); font-size: 22px; }
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* STATS */
+.stats { padding: 90px 0 30px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.stat { background: var(--paper); border: var(--bd); border-radius: 20px; box-shadow: var(--sh); padding: 28px 24px; transition: transform .2s, box-shadow .2s; }
+.stat:nth-child(2) { background: var(--yellow); transform: rotate(-1.2deg); }
+.stat:nth-child(3) { background: var(--orange); transform: rotate(1deg); }
+.stat:nth-child(4) { background: var(--green); color: #fff; transform: rotate(-.8deg); }
+.stat:hover { transform: translate(-3px, -3px) rotate(0); box-shadow: var(--sh-lg); }
+.stat b { display: block; font-family: var(--head); font-weight: 800; font-size: 58px; line-height: 1; letter-spacing: -2px; }
+.stat span { font-weight: 600; font-size: 14.5px; }
+
+/* TILT BASE */
+[data-tilt] { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(var(--lx, 0px), var(--ly, 0px), 0); transition: transform .18s ease-out, box-shadow .18s ease-out; will-change: transform; }
+
+/* KEUNGGULAN */
+.feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 64px; }
+.feat { background: var(--paper); border: var(--bd); border-radius: 22px; box-shadow: var(--sh); padding: 30px 28px 32px; position: relative; min-height: 250px; display: flex; flex-direction: column; }
+.feat:hover { --lx: -4px; --ly: -4px; box-shadow: var(--sh-lg); }
+.feat .k { font-size: 11.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; border: 2px solid currentColor; border-radius: 999px; padding: 4px 12px; align-self: flex-start; }
+.feat .no { font-family: var(--head); font-weight: 800; font-size: 64px; line-height: 1; letter-spacing: -3px; margin: 26px 0 10px; }
+.feat h4 { font-family: var(--head); font-weight: 700; font-size: 20px; line-height: 1.25; margin-bottom: 8px; letter-spacing: -.3px; }
+.feat p { font-size: 14.5px; opacity: .85; }
+.feat.y { background: var(--yellow); }
+.feat.g { background: var(--green); color: #fff; }
+.feat.o { background: var(--orange); }
+
+/* PROFIL */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-visual { position: relative; }
+.about-visual .block { position: absolute; inset: 24px -24px -24px 24px; background: var(--yellow); border: var(--bd); border-radius: 26px; }
+.about-img { position: relative; height: 520px; width: 100%; object-fit: cover; border: var(--bd); border-radius: 26px; background: repeating-linear-gradient(-45deg, var(--green) 0 14px, var(--green-d) 14px 28px); }
+.about-float { position: absolute; right: -30px; bottom: 50px; max-width: 250px; background: var(--paper); border: var(--bd); border-radius: 18px; box-shadow: var(--sh); padding: 18px 20px; transform: rotate(3deg); z-index: 3; }
+.about-float b { display: block; font-family: var(--head); font-size: 17px; line-height: 1.2; margin-bottom: 5px; }
+.about-float span { font-size: 13px; color: var(--muted); }
+.checks { margin-top: 34px; display: grid; gap: 14px; }
+.check { display: flex; gap: 16px; align-items: flex-start; background: var(--paper); border: var(--bd); border-radius: 16px; padding: 18px 20px; box-shadow: var(--sh-sm); transition: transform .2s, box-shadow .2s; }
+.check:hover { transform: translate(-3px, -3px); box-shadow: var(--sh); }
+.check .ic { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--green); color: var(--yellow); border: 2px solid var(--ink); display: grid; place-items: center; font-weight: 800; }
+.check h4 { font-family: var(--head); font-size: 17px; line-height: 1.25; }
+.check p { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+/* PROGRAM */
+.program { background: var(--green); color: #fff; border-block: var(--bd); overflow: hidden; }
+.program::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.14) 1.6px, transparent 1.6px); background-size: 26px 26px; opacity: .6; }
+.program .container { position: relative; }
+.program .lead { color: #cfe3d9; }
+.program .tag { background: var(--orange); }
+.program-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px; margin-top: 64px; }
+.p-card { background: var(--paper); color: var(--ink); border: var(--bd); border-radius: 26px; box-shadow: 10px 10px 0 var(--yellow), 10px 10px 0 2.5px var(--ink); padding: 40px; position: relative; }
+.p-card:hover { --lx: -4px; --ly: -4px; }
+.p-card:nth-child(2) { box-shadow: 10px 10px 0 var(--orange), 10px 10px 0 2.5px var(--ink); }
+.stamp { position: absolute; top: -26px; right: 28px; width: 82px; height: 82px; border-radius: 50%; background: var(--yellow); border: var(--bd); display: grid; place-items: center; font-family: var(--head); font-weight: 800; font-size: 24px; transform: rotate(12deg); box-shadow: var(--sh-sm); transition: transform .5s; }
+.p-card:nth-child(2) .stamp { background: var(--orange); }
+.p-card:hover .stamp { transform: rotate(-12deg) scale(1.1); }
+.p-card .n { font-family: var(--head); font-weight: 800; font-size: 15px; letter-spacing: 2px; color: var(--muted); }
+.p-card h3 { font-family: var(--head); font-weight: 800; font-size: 34px; line-height: 1.08; letter-spacing: -1px; margin: 14px 0 14px; max-width: 360px; }
+.p-card p { color: #3e4a43; font-size: 15.5px; }
+.p-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.p-list li { font-weight: 700; font-size: 13px; padding: 6px 14px; border: 2px solid var(--ink); border-radius: 999px; background: var(--cream); transition: .2s; }
+.p-list li:hover { background: var(--yellow); transform: translateY(-3px) rotate(-2deg); }
+.program-note { margin-top: 56px; background: var(--yellow); color: var(--ink); border: var(--bd); border-radius: 20px; box-shadow: var(--sh); padding: 24px 30px; display: flex; gap: 20px; align-items: center; font-size: 15.5px; transform: rotate(-.6deg); }
+.program-note .badge { flex: none; font-family: var(--head); font-weight: 800; font-size: 14px; background: var(--ink); color: var(--yellow); padding: 8px 14px; border-radius: 10px; }
+
+/* KERJASAMA */
+.partner-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 64px; }
+.partner { background: var(--paper); border: var(--bd); border-radius: 22px; box-shadow: var(--sh); padding: 32px 30px; }
+.partner:hover { --lx: -4px; --ly: -4px; box-shadow: var(--sh-lg); }
+.partner .t { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 12px; border: 2px solid var(--ink); border-radius: 999px; background: var(--yellow); margin-bottom: 20px; }
+.partner:nth-child(2) .t { background: var(--orange); }
+.partner:nth-child(3) .t { background: #bfe3d0; }
+.partner h4 { font-family: var(--head); font-size: 25px; font-weight: 800; letter-spacing: -.6px; margin-bottom: 10px; }
+.partner p { font-size: 14.5px; color: var(--muted); }
+
+/* ALUR */
+.flow { background: var(--paper); border-block: var(--bd); }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; margin-top: 70px; position: relative; counter-reset: s; }
+.steps::before { content: ""; position: absolute; top: 28px; left: 8%; right: 8%; border-top: 3px dashed var(--ink); opacity: .35; }
+.step { position: relative; background: var(--cream); border: var(--bd); border-radius: 20px; box-shadow: var(--sh); padding: 44px 24px 28px; margin-top: 10px; }
+.step:hover { --lx: -4px; --ly: -4px; box-shadow: var(--sh-lg); }
+.step::before { counter-increment: s; content: counter(s); position: absolute; top: -28px; left: 22px; width: 56px; height: 56px; border-radius: 50%; background: var(--orange); border: var(--bd); box-shadow: var(--sh-sm); display: grid; place-items: center; font-family: var(--head); font-weight: 800; font-size: 26px; }
+.step:nth-child(even)::before { background: var(--yellow); }
+.step h4 { font-family: var(--head); font-weight: 800; font-size: 20px; margin-bottom: 8px; letter-spacing: -.4px; }
+.step p { font-size: 14.5px; color: var(--muted); }
+.step a { font-weight: 700; color: var(--green); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.flow-cta { margin-top: 56px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* QUOTE */
+.quote { text-align: center; padding: 130px 0; overflow: hidden; }
+.quote blockquote { font-family: var(--head); font-weight: 800; font-size: clamp(32px, 5.2vw, 70px); line-height: 1.08; letter-spacing: -2px; max-width: 1000px; margin: 0 auto; }
+.quote cite { display: inline-block; margin-top: 36px; font-style: normal; font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; background: var(--ink); color: var(--cream); padding: 8px 18px; border-radius: 999px; }
+.quote .deco { position: absolute; font-family: var(--head); font-weight: 800; font-size: 300px; line-height: .7; color: var(--yellow); opacity: .55; z-index: -1; user-select: none; }
+.quote .d1 { top: 60px; left: 4%; }
+.quote .d2 { bottom: 20px; right: 4%; transform: rotate(180deg); }
+
+/* FAQ */
+.faq { background: var(--yellow); border-block: var(--bd); }
+.faq .tag { background: var(--paper); }
+.faq-wrap { max-width: 800px; margin: 60px auto 0; display: grid; gap: 16px; }
+.faq-item { background: var(--paper); border: var(--bd); border-radius: 18px; box-shadow: var(--sh-sm); overflow: hidden; transition: box-shadow .2s, transform .2s; }
+.faq-item:hover { transform: translate(-2px, -2px); box-shadow: var(--sh); }
+.faq-item.open { box-shadow: var(--sh); }
+.faq-q { width: 100%; background: none; border: none; text-align: left; cursor: pointer; padding: 22px 26px; display: flex; justify-content: space-between; align-items: center; gap: 20px; font: 700 17px 'Bricolage Grotesque', sans-serif; color: var(--ink); }
+.faq-q span { flex: none; width: 34px; height: 34px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-size: 22px; line-height: 1; background: var(--cream); transition: transform .35s, background .3s; }
+.faq-item.open .faq-q span { transform: rotate(135deg); background: var(--orange); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+.faq-a p { padding: 0 26px 24px; font-size: 15px; color: #3e4a43; }
+
+/* CTA */
+.cta { padding: 110px 0; }
+.cta-box { background: var(--orange); border: var(--bd); border-radius: 32px; box-shadow: 12px 12px 0 var(--ink); padding: 80px 48px; text-align: center; position: relative; overflow: hidden; }
+.cta-box::before, .cta-box::after { content: ""; position: absolute; border: var(--bd); border-radius: 50%; }
+.cta-box::before { width: 220px; height: 220px; background: var(--yellow); left: -70px; top: -70px; animation: bob 7s ease-in-out infinite; }
+.cta-box::after { width: 160px; height: 160px; background: var(--green); right: -40px; bottom: -50px; animation: bob 9s ease-in-out infinite reverse; }
+@keyframes bob { 50% { transform: translateY(20px) rotate(10deg); } }
+.cta-box h2 { position: relative; z-index: 2; font-family: var(--head); font-weight: 800; font-size: clamp(32px, 5vw, 60px); line-height: 1.05; letter-spacing: -2px; max-width: 800px; margin: 0 auto; }
+.cta-box p { position: relative; z-index: 2; max-width: 520px; margin: 20px auto 0; font-weight: 500; font-size: 17px; }
+.cta-box .hero-actions { position: relative; z-index: 2; justify-content: center; animation: none; opacity: 1; }
+.cta-box .btn { background: var(--paper); }
+.cta-box .btn-green { background: var(--green); }
+
+/* FOOTER */
+footer { background: var(--ink); color: var(--cream); padding: 80px 0 30px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1.3fr 1.2fr; gap: 50px; padding-bottom: 56px; }
+footer .brand { color: var(--cream); margin-bottom: 18px; }
+footer .brand small { color: #8b988f; }
+footer p, footer a { font-size: 14.5px; color: #aab6ae; }
+footer h5 { font-family: var(--head); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); margin-bottom: 20px; }
+footer ul { list-style: none; display: grid; gap: 12px; }
+footer a { transition: color .2s, padding .2s; }
+footer a:hover { color: var(--yellow); padding-left: 6px; }
+.copyright { border-top: 1px solid #ffffff22; padding-top: 26px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 13px; color: #7a877f; }
+
+/* FAB */
+.fab { position: fixed; right: 22px; bottom: 22px; z-index: 90; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+.fab a { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border: var(--bd); border-radius: 14px; font-weight: 700; font-size: 14px; box-shadow: var(--sh-sm); transition: transform .15s, box-shadow .15s; }
+.fab a:hover { transform: translate(-2px, -2px); box-shadow: var(--sh); }
+.fab .wa { background: #4ade80; }
+.fab .tes { background: var(--yellow); }
+.fab .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink); animation: blink 1.6s infinite; }
+@keyframes blink { 50% { opacity: .2; } }
+
+/* REVEAL */
+.reveal { opacity: 0; translate: 0 40px; transition: opacity .8s ease, translate .8s cubic-bezier(.2,.8,.2,1); transition-delay: var(--d, 0s); }
+.reveal.show { opacity: 1; translate: 0 0; }
+
+/* RESPONSIVE */
+@media (max-width: 980px) {
+    section { padding: 80px 0; }
+    .hero-grid { grid-template-columns: 1fr; gap: 80px; }
+    .hero-visual { max-width: 480px; margin: 0 auto; width: 100%; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .feat-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: 1fr; gap: 70px; }
+    .about-img { height: 400px; }
+    .partner-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: repeat(2, 1fr); gap: 50px 26px; }
+    .steps::before { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 800px) {
+    .menu-btn { display: block; }
+    .nav-menu { display: none; position: absolute; top: 74px; left: 0; width: 100%; flex-direction: column; align-items: stretch; gap: 4px; padding: 18px 5%; background: var(--paper); border-bottom: var(--bd); }
+    .nav-menu.active { display: flex; }
+    .nav-menu a:not(.btn) { padding: 12px 6px; }
+    .nav-menu .btn { margin: 8px 0 0; justify-content: center; }
+    .program-grid { grid-template-columns: 1fr; gap: 56px; }
+    .p-card { padding: 32px 26px; }
+    .program-note { flex-direction: column; text-align: center; }
+}
+@media (max-width: 620px) {
+    .feat-grid, .steps { grid-template-columns: 1fr; }
+    .photo { height: 320px; }
+    .sticker.s2 { left: -10px; }
+    .sticker.s3 { right: -6px; }
+    .spin { right: -10px; width: 110px; height: 110px; }
+    .spin .core { inset: 24px; font-size: 20px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .cta-box { padding: 60px 24px; }
+    .fab a span.txt { display: none; }
+    .quote .deco { display: none; }
+    .marquee span { font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    .reveal { opacity: 1; translate: 0 0; }
+    .hero h1 .w > span { transform: none; }
+    .mark { background-size: 100% 100%; }
+}
+</style>
+</head>
+
+<body>
+<div class="progress" id="progress"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container nav-inner">
+        <a href="#home" class="brand">
+            <span class="brand-mark">P</span>
+            <span>PeTIK II<small>Jombang</small></span>
+        </a>
+        <button class="menu-btn" id="menuBtn" aria-label="Buka menu">☰</button>
+        <div class="nav-menu" id="navMenu">
+            <a href="#home">Home</a>
+            <a href="#keunggulan">Keunggulan</a>
+            <a href="#profil">Profil</a>
+            <a href="#program">Jurusan</a>
+            <a href="#kerjasama">Kerjasama</a>
+            <a href="#daftar">Alur Daftar</a>
+            <a href="https://pmb.petikjombang.com/" target="_blank" rel="noopener" class="btn">Daftar <span class="arr">→</span></a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+    <div class="container hero-grid">
+        <div>
+            <div class="chip"><i></i> Pesantren Teknologi Informasi dan Komunikasi · YBM PLN</div>
+            <h1>
+                <span class="w"><span style="--i:0">Pesantren</span></span>
+                <span class="w"><span style="--i:1">yang</span></span>
+                <span class="w"><span style="--i:2">melahirkan</span></span>
+                <span class="w"><span style="--i:3">santri</span></span>
+                <span class="w"><span style="--i:4">dengan</span></span>
+                <span class="w"><span style="--i:5"><span class="mark">kemampuan&nbsp;IT.</span></span></span>
+            </h1>
+            <p class="sub">Pendidikan satu tahun, gratis, dan siap kerja. Belajar Digital Marketing atau Pengembangan Perangkat Lunak sambil dibina karakter dan akhlaknya.</p>
+            <div class="hero-actions">
+                <a href="https://pmb.petikjombang.com/" target="_blank" rel="noopener" class="btn" data-mag>Pendaftaran Mahasantri Baru <span class="arr">→</span></a>
+                <a href="https://wa.me/6281393963363" target="_blank" rel="noopener" class="btn btn-light" data-mag>Hubungi via WhatsApp</a>
+            </div>
+        </div>
+
+        <div class="hero-visual" id="heroVisual">
+            <span class="sticker s1">Gratis!</span>
+            <span class="sticker s2">Siap Kerja</span>
+            <span class="sticker s3">Tahfidz</span>
+
+            <div class="photo-frame">
+                <div class="photo"><img src="gedung-petik.jpg" alt="Gedung PeTIK II Jombang" onerror="this.style.display='none'"></div>
+                <div class="photo-cap"><span>PeTIK II Jombang</span><span>Plosogeneng, Jombang</span></div>
+            </div>
+
+            <a class="spin" href="https://pmb.petikjombang.com/" target="_blank" rel="noopener" aria-label="Daftar di situs PMB PeTIK Jombang">
+                <svg viewBox="0 0 140 140" aria-hidden="true">
+                    <defs><path id="circ" d="M70,70 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs>
+                    <text font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="14.2" letter-spacing="2.4" fill="#17201b">
+                        <textPath href="#circ">GRATIS • 1 TAHUN • SIAP KERJA • DAFTAR •</textPath>
+                    </text>
+                </svg>
+                <div class="core">↗</div>
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+        <span>Gratis biaya pendidikan</span><span>Satu tahun siap kerja</span><span>Pengembangan Perangkat Lunak</span><span>Digital Marketing</span><span>Tahfidz Al-Qur'an</span><span>Uang saku bulanan</span>
+        <span>Gratis biaya pendidikan</span><span>Satu tahun siap kerja</span><span>Pengembangan Perangkat Lunak</span><span>Digital Marketing</span><span>Tahfidz Al-Qur'an</span><span>Uang saku bulanan</span>
+    </div>
+</div>
+
+<!-- STATS -->
+<section class="stats">
+    <div class="container stats-grid">
+        <div class="stat reveal" data-tilt><b data-count="1">0</b><span>Tahun masa pendidikan</span></div>
+        <div class="stat reveal" style="--d:.1s" data-tilt><b data-count="2">0</b><span>Jurusan IT</span></div>
+        <div class="stat reveal" style="--d:.2s" data-tilt><b data-count="9">0</b><span>Keunggulan program</span></div>
+        <div class="stat reveal" style="--d:.3s" data-tilt><b data-count="125">0</b><span>Total santri tercatat</span></div>
+    </div>
+</section>
+
+<!-- KEUNGGULAN -->
+<section id="keunggulan">
+    <div class="container">
+        <div class="center reveal">
+            <span class="tag">Mengapa PeTIK</span>
+            <h2 class="title">9 keunggulan <span class="mark">PeTIK Jombang</span></h2>
+            <p class="lead">Dari biaya pendidikan sampai persiapan karier, semuanya dirancang supaya santri bisa fokus belajar.</p>
+        </div>
+
+        <div class="feat-grid">
+            <div class="feat g reveal" data-tilt><span class="k">Biaya</span><div class="no">01</div><h4>Gratis Biaya Pendidikan</h4><p>Pendidikan tanpa biaya untuk santri dari keluarga dhuafa.</p></div>
+            <div class="feat reveal" style="--d:.08s" data-tilt><span class="k">Fasilitas</span><div class="no">02</div><h4>Fasilitas IT &amp; Boarding Terbaik</h4><p>Fasilitas lengkap dengan laboratorium komputer berkelas terbaik.</p></div>
+            <div class="feat y reveal" style="--d:.16s" data-tilt><span class="k">Uang saku</span><div class="no">03</div><h4>Uang Saku Selama Masa Pendidikan</h4><p>Santri mendapat uang saku selama satu tahun pendidikan untuk kebutuhan sehari-hari.</p></div>
+
+            <div class="feat reveal" data-tilt><span class="k">Fokus</span><div class="no">04</div><h4>Fokus IT: Digital Marketing dan Pengembangan Perangkat Lunak</h4><p>Pendidikan difokuskan pada keterampilan digital yang sangat dibutuhkan dunia kerja.</p></div>
+            <div class="feat o reveal" style="--d:.08s" data-tilt><span class="k">Sertifikasi</span><div class="no">05</div><h4>Bonus Pelatihan Sertifikasi + Tahfidz</h4><p>Pelatihan sertifikasi industri serta tahfidz Al-Qur'an.</p></div>
+            <div class="feat reveal" style="--d:.16s" data-tilt><span class="k">Karier</span><div class="no">06</div><h4>Satu Tahun Siap Kerja</h4><p>Santri dipersiapkan langsung bekerja dengan kemampuan yang relevan di industri.</p></div>
+
+            <div class="feat y reveal" data-tilt><span class="k">Transport</span><div class="no">07</div><h4>Gratis Pembiayaan Pemberangkatan dan Kepulangan</h4><p>Biaya berangkat dan pulang santri ke tempat pendidikan sepenuhnya ditanggung.</p></div>
+            <div class="feat reveal" style="--d:.08s" data-tilt><span class="k">Karakter</span><div class="no">08</div><h4>Pembinaan Karakter</h4><p>Pembekalan diniyah ahlus sunnah wal jamaah agar santri berakhlak mulia.</p></div>
+            <div class="feat g reveal" style="--d:.16s" data-tilt><span class="k">Industri</span><div class="no">09</div><h4>Kerjasama dengan Dunia Industri dan Pendidikan</h4><p>Bermitra dengan lembaga unggulan untuk menunjang karier santri.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- PROFIL -->
+<section id="profil" style="padding-top:40px">
+    <div class="container about-grid">
+        <div class="about-visual reveal">
+            <div class="block"></div>
+            <img src="gedung-petik.jpg" class="about-img" alt="Pesantren Teknologi Informasi dan Komunikasi II Jombang" onerror="this.removeAttribute('src')">
+            <div class="about-float">
+                <b>Di bawah naungan YBM PLN</b>
+                <span>Yayasan Baitul Maal PLN, mendukung pendidikan teknologi bagi anak dari keluarga dhuafa.</span>
+            </div>
+        </div>
+
+        <div>
+            <div class="reveal">
+                <span class="tag">Profil</span>
+                <h2 class="title">Teknologi dan karakter Islami, <span class="mark">berjalan bersama.</span></h2>
+                <p class="lead">PeTIK II Jombang adalah pesantren di bawah naungan YBM PLN. Berbeda dari pesantren pada umumnya, di sini mahasantri tidak hanya mendalami ilmu agama, tetapi juga belajar teknologi informasi.</p>
+            </div>
+
+            <div class="checks">
+                <div class="check reveal"><div class="ic">1</div><div><h4>Generasi berkarakter Islam, berwawasan teknologi</h4><p>Penerapan teknologi untuk mewujudkan generasi muda yang siap menghadapi era digital.</p></div></div>
+                <div class="check reveal" style="--d:.1s"><div class="ic">2</div><div><h4>Dari mustahik menjadi muzakki</h4><p>Tujuan hadirnya PeTIK: meningkatkan derajat mahasantri melalui keahlian dan pekerjaan yang layak.</p></div></div>
+                <div class="check reveal" style="--d:.2s"><div class="ic">3</div><div><h4>Dasar-dasar agama</h4><p>Mahasantri belajar tauhid, fikih, akhlak, dan tasawuf dengan bimbingan ustaz.</p></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="program" id="program">
+    <div class="container">
+        <div class="center reveal">
+            <span class="tag">Jurusan</span>
+            <h2 class="title">Dua jurusan, satu tahun <span class="mark" style="color:var(--ink)">menuju siap kerja.</span></h2>
+            <p class="lead">Pilih bidang yang sesuai minat, lalu kuasai keterampilan digital yang dibutuhkan industri.</p>
+        </div>
+
+        <div class="program-grid">
+            <article class="p-card reveal" data-tilt>
+                <div class="stamp">PPL</div>
+                <span class="n">JURUSAN 01</span>
+                <h3>Pengembangan Perangkat Lunak</h3>
+                <p>Mahasantri belajar membuat aplikasi, mulai dari dasar pemrograman hingga mengembangkan aplikasi yang dipakai nyata, termasuk untuk manajemen internal PeTIK.</p>
+                <ul class="p-list"><li>Pemrograman</li><li>Aplikasi</li><li>Proyek nyata</li><li>Sertifikasi</li></ul>
+            </article>
+
+            <article class="p-card reveal" style="--d:.12s" data-tilt>
+                <div class="stamp">DM</div>
+                <span class="n">JURUSAN 02</span>
+                <h3>Digital Marketing</h3>
+                <p>Mahasantri belajar mempromosikan produk dan layanan melalui media digital, dari strategi konten sampai pengelolaan kanal pemasaran online.</p>
+                <ul class="p-list"><li>Promosi digital</li><li>Konten</li><li>Media sosial</li><li>Sertifikasi</li></ul>
+            </article>
+        </div>
+
+        <div class="program-note reveal">
+            <span class="badge">MAGANG</span>
+            <div>Santri dari kedua jurusan mendapat kesempatan magang bersama mitra industri. Laporan kegiatan dan kelompok magang dipantau lewat Dashboard Magang.</div>
+        </div>
+    </div>
+</section>
+
+<!-- KERJASAMA -->
+<section id="kerjasama">
+    <div class="container">
+        <div class="center reveal">
+            <span class="tag">Kerjasama</span>
+            <h2 class="title">Didukung <span class="mark">mitra</span> yang peduli.</h2>
+            <p class="lead">Mitra unggulan yang mendukung pendidikan dan karier santri PeTIK Jombang.</p>
+        </div>
+
+        <div class="partner-grid">
+            <div class="partner reveal" data-tilt>
+                <span class="t">Yayasan</span>
+                <h4>YBM PLN</h4>
+                <p>Yayasan di bawah naungan PLN yang berfokus pada kegiatan sosial dan pemberdayaan masyarakat, termasuk pendidikan teknologi bagi anak dari keluarga dhuafa melalui PeTIK Jombang.</p>
+            </div>
+            <div class="partner reveal" style="--d:.1s" data-tilt>
+                <span class="t">Telekomunikasi</span>
+                <h4>Icon Plus Surabaya</h4>
+                <p>Perusahaan layanan telekomunikasi dan jaringan internet yang mendukung PeTIK dengan akses internet cepat serta kesempatan magang bagi santri kedua jurusan.</p>
+            </div>
+            <div class="partner reveal" style="--d:.2s" data-tilt>
+                <span class="t">Software House</span>
+                <h4>Deeva Tech (Jombang)</h4>
+                <p>Perusahaan pengembang aplikasi (software house) sekaligus bergerak di bidang digital marketing di Jombang.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ALUR PENDAFTARAN -->
+<section class="flow" id="daftar">
+    <div class="container">
+        <div class="center reveal">
+            <span class="tag">Pendaftaran Mahasantri Baru</span>
+            <h2 class="title">Daftar itu <span class="mark">gampang.</span></h2>
+            <p class="lead">Pendaftaran dilakukan online lewat situs PMB. Cek jadwal dan persyaratan terbaru di sana.</p>
+        </div>
+        <div class="steps">
+            <div class="step reveal" data-tilt><h4>Siapkan berkas</h4><p>Siapkan berkas persyaratan yang telah ditentukan, dalam bentuk JPG, PNG, atau PDF.</p></div>
+            <div class="step reveal" style="--d:.1s" data-tilt><h4>Isi formulir online</h4><p>Isi formulir pendaftaran di <a href="https://pmb.petikjombang.com/" target="_blank" rel="noopener">pmb.petikjombang.com</a>.</p></div>
+            <div class="step reveal" style="--d:.2s" data-tilt><h4>Kirim berkas</h4><p>Upload online, kirim via email ke pmb.petikjombang@gmail.com, atau lewat kurir / datang langsung ke pesantren.</p></div>
+            <div class="step reveal" style="--d:.3s" data-tilt><h4>Verifikasi &amp; pengumuman</h4><p>Pendaftar masuk grup WhatsApp. Panitia memverifikasi dan mengumumkan hasil lewat website dan grup.</p></div>
+        </div>
+        <div class="flow-cta reveal">
+            <a href="https://pmb.petikjombang.com/" target="_blank" rel="noopener" class="btn" data-mag>Buka Situs PMB <span class="arr">→</span></a>
+            <a href="https://webpetik.petikjombang.com/form-test-minat" target="_blank" rel="noopener" class="btn btn-yellow" data-mag>Tes Minat Bakat IT</a>
+        </div>
+    </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+    <span class="deco d1">“</span>
+    <span class="deco d2">“</span>
+    <div class="container reveal">
+        <blockquote>Dari <span class="mark">mustahik</span> menjadi <span class="mark">muzakki</span>, lewat ilmu, teknologi, dan akhlak.</blockquote>
+        <cite>PeTIK II Jombang · YBM PLN</cite>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="center reveal">
+            <span class="tag">Pertanyaan Umum</span>
+            <h2 class="title">Yang sering ditanyakan.</h2>
+        </div>
+
+        <div class="faq-wrap">
+            <div class="faq-item reveal">
+                <button class="faq-q">Apakah pendidikan di PeTIK benar-benar gratis? <span>+</span></button>
+                <div class="faq-a"><p>Ya. PeTIK menyediakan pendidikan tanpa biaya untuk santri dari keluarga dhuafa. Biaya pemberangkatan dan kepulangan juga ditanggung, dan santri mendapat uang saku selama masa pendidikan.</p></div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-q">Berapa lama masa pendidikannya? <span>+</span></button>
+                <div class="faq-a"><p>Satu tahun. Selama itu santri dipersiapkan agar siap bekerja atau melanjutkan kuliah.</p></div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-q">Jurusan apa saja yang tersedia? <span>+</span></button>
+                <div class="faq-a"><p>Dua jurusan: Pengembangan Perangkat Lunak (PPL) dan Digital Marketing (DM).</p></div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-q">Apakah ada pembinaan agama? <span>+</span></button>
+                <div class="faq-a"><p>Ada. Santri mendapat pembekalan diniyah ahlus sunnah wal jamaah, dasar-dasar agama, serta bonus pelatihan tahfidz Al-Qur'an.</p></div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-q">Bagaimana cara mendaftar? <span>+</span></button>
+                <div class="faq-a"><p>Siapkan berkas persyaratan, lalu isi formulir online di pmb.petikjombang.com. Pertanyaan lain bisa lewat WhatsApp admin di +62 813-9396-3363.</p></div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-q">Saya belum yakin jurusan mana yang cocok. <span>+</span></button>
+                <div class="faq-a"><p>Coba Tes Minat Bakat IT di website resmi PeTIK untuk membantu mengenali kecenderungan Anda.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-box reveal">
+            <h2>Siap belajar IT dan membangun masa depan di PeTIK Jombang?</h2>
+            <p>Pendaftaran Mahasantri Baru dilakukan online. Hubungi admin kalau ada pertanyaan.</p>
+            <div class="hero-actions">
+                <a href="https://pmb.petikjombang.com/" target="_blank" rel="noopener" class="btn" data-mag>Daftar Sekarang <span class="arr">→</span></a>
+                <a href="https://wa.me/6281393963363" target="_blank" rel="noopener" class="btn btn-green" data-mag>Tanya via WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="kontak">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <a href="#home" class="brand"><span class="brand-mark">P</span><span>PeTIK II<small>Jombang</small></span></a>
+                <p>Pesantren Teknologi Informasi dan Komunikasi Jombang YBM PLN. Pesantren yang melahirkan santri dengan kemampuan IT.</p>
+            </div>
+            <div>
+                <h5>Navigasi</h5>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#profil">Profil</a></li>
+                    <li><a href="#kerjasama">Kerjasama</a></li>
+                    <li><a href="https://webpetik.petikjombang.com/artikel" target="_blank" rel="noopener">Berita</a></li>
+                    <li><a href="https://webpetik.petikjombang.com/sebaran_santri" target="_blank" rel="noopener">Dashboard Sebaran Santri</a></li>
+                    <li><a href="https://webpetik.petikjombang.com/dashboard-magang" target="_blank" rel="noopener">Dashboard Magang</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Alamat</h5>
+                <ul>
+                    <li><p>Pesantren Teknologi Informasi dan Komunikasi Jombang YBM PLN<br>Jl. KH. Bisri Syansuri, RT.001/RW.005, Plosogeneng, Kec. Jombang, Kabupaten Jombang, Jawa Timur 61416</p></li>
+                    <li><a href="https://www.google.com/maps?q=PeTIK%20II%20Jombang" target="_blank" rel="noopener">Lihat di Google Maps →</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Informasi</h5>
+                <ul>
+                    <li><a href="https://wa.me/6281393963363" target="_blank" rel="noopener">WhatsApp Admin (+62 813-9396-3363)</a></li>
+                    <li><a href="mailto:petikjombang@gmail.com">petikjombang@gmail.com</a></li>
+                    <li><a href="https://www.instagram.com/petik_jombang" target="_blank" rel="noopener">Instagram @petik_jombang</a></li>
+                    <li><a href="https://www.youtube.com/@tvpetikjombang" target="_blank" rel="noopener">YouTube @tvpetikjombang</a></li>
+                    <li><a href="https://www.facebook.com/petikIIjombang" target="_blank" rel="noopener">Facebook @Petik Jombang</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <span>© 2026 PeTIK Jombang · YBM PLN</span>
+            <span>Pesantren yang Melahirkan Santri dengan Kemampuan IT</span>
+        </div>
+    </div>
+</footer>
+
+<!-- FAB -->
+<div class="fab">
+    <a href="https://webpetik.petikjombang.com/form-test-minat" target="_blank" rel="noopener" class="tes"><span class="txt">Tes Minat IT</span></a>
+    <a href="https://wa.me/6281393963363" target="_blank" rel="noopener" class="wa"><i class="dot"></i><span class="txt">Chat WhatsApp</span></a>
+</div>
+
+<script>
+const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// SCROLL PROGRESS
+const bar = document.getElementById("progress");
+const onScroll = () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = "scaleX(" + (h > 0 ? scrollY / h : 0) + ")";
+};
+addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+// MOBILE MENU
+const menuBtn = document.getElementById("menuBtn");
+const navMenu = document.getElementById("navMenu");
+menuBtn.addEventListener("click", () => navMenu.classList.toggle("active"));
+navMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => navMenu.classList.remove("active")));
+
+// FAQ
+document.querySelectorAll(".faq-item").forEach(item => {
+    const a = item.querySelector(".faq-a");
+    item.querySelector(".faq-q").addEventListener("click", () => {
+        const open = item.classList.contains("open");
+        document.querySelectorAll(".faq-item").forEach(i => {
+            i.classList.remove("open");
+            i.querySelector(".faq-a").style.maxHeight = null;
+        });
+        if (!open) {
+            item.classList.add("open");
+            a.style.maxHeight = a.scrollHeight + "px";
+        }
+    });
+});
+
+// COUNTERS
+function count(el) {
+    const target = +el.dataset.count;
+    if (reduce) { el.textContent = target; return; }
+    const dur = 1400, t0 = performance.now();
+    const tick = t => {
+        const p = Math.min((t - t0) / dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+}
+
+// SCROLL REVEAL
+const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("show");
+        e.target.querySelectorAll("[data-count]").forEach(count);
+        io.unobserve(e.target);
+    });
+}, { threshold: 0.15 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+// 3D TILT (kartu timbul)
+if (fine && !reduce) {
+    document.querySelectorAll("[data-tilt]").forEach(el => {
+        el.addEventListener("mousemove", e => {
+            const r = el.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - .5;
+            const y = (e.clientY - r.top) / r.height - .5;
+            el.style.setProperty("--ry", (x * 9) + "deg");
+            el.style.setProperty("--rx", (-y * 9) + "deg");
+        });
+        el.addEventListener("mouseleave", () => {
+            el.style.setProperty("--ry", "0deg");
+            el.style.setProperty("--rx", "0deg");
+        });
+    });
+
+    // MAGNETIC BUTTONS
+    document.querySelectorAll("[data-mag]").forEach(b => {
+        b.addEventListener("mousemove", e => {
+            const r = b.getBoundingClientRect();
+            const x = (e.clientX - r.left - r.width / 2) * .15;
+            const y = (e.clientY - r.top - r.height / 2) * .25;
+            b.style.translate = x + "px " + y + "px";
+        });
+        b.addEventListener("mouseleave", () => { b.style.translate = ""; });
+    });
+
+    // HERO MOUSE PARALLAX
+    const hv = document.getElementById("heroVisual");
+    document.querySelector(".hero").addEventListener("mousemove", e => {
+        hv.style.setProperty("--mx", (e.clientX / innerWidth - .5) * 2);
+        hv.style.setProperty("--my", (e.clientY / innerHeight - .5) * 2);
+    });
+}
+
+// HERO PARALLAX ON SCROLL
+const frame = document.querySelector(".photo-frame");
+if (!reduce) {
+    addEventListener("scroll", () => {
+        if (scrollY < innerHeight) frame.style.translate = "0 " + (scrollY * -0.06) + "px";
+    }, { passive: true });
+}
+</script>
+
+</body>
+</html>
