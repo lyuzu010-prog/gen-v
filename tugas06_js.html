@@ -1,0 +1,58 @@
+function cekAngka(angka) {
+  if (angka > 0) {
+    console.log(`${angka} adalah bilangan Positif`);
+  } else if (angka < 0) {
+    console.log(`${angka} adalah bilangan Negatif`);
+  } else {
+    console.log(`${angka} adalah Nol`);
+  }
+}
+
+// Contoh pengujian program:
+cekAngka(10);  // Output: 10 adalah bilangan Positif
+cekAngka(-5);  // Output: -5 adalah bilangan Negatif
+cekAngka(0);   // Output: 0 adalah Nol
+
+
+    function cekTerbesar(a, b, c) {
+  // Cara 1: Menggunakan logika if-else
+  let terbesar;
+  if (a >= b && a >= c) {
+    terbesar = a;
+  } else if (b >= a && b >= c) {
+    terbesar = b;
+  } else {
+    terbesar = c;
+  }
+  console.log(`Bilangan terbesar adalah: ${terbesar}`);
+  
+}
+
+// Uji coba program
+cekTerbesar(10, 25, 5); // Output: Bilangan terbesar adalah: 25
+cekTerbesar(100, 50, 75); // Output: Bilangan terbesar adalah: 100
+VM92:11 Bilangan terbesar adalah: 25
+VM92:11 Bilangan terbesar adalah: 100
+undefined
+
+
+
+    function tentukanPredikat(nilai) {
+  if (nilai >= 85 && nilai <= 100) {
+    console.log(`Nilai ${nilai} mendapat predikat: A`);
+  } else if (nilai >= 70 && nilai < 85) {
+    console.log(`Nilai ${nilai} mendapat predikat: B`);
+  } else if (nilai >= 55 && nilai < 70) {
+    console.log(`Nilai ${nilai} mendapat predikat: C`);
+  } else if (nilai >= 0 && nilai < 55) {
+    console.log(`Nilai ${nilai} mendapat predikat: D`);
+  } else {
+    console.log(`Nilai ${nilai} tidak valid (harus 0-100)`);
+  }
+}
+
+// Uji coba program
+tentukanPredikat(92); // Output: Nilai 92 mendapat predikat: A
+tentukanPredikat(75); // Output: Nilai 75 mendapat predikat: B
+tentukanPredikat(40); // Output: Nilai 40 mendapat predikat: D
+tentukanPredikat(105); // Output: Nilai 105 tidak valid (harus 0-100)
