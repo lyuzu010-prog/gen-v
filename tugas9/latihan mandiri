@@ -1,0 +1,46 @@
+const buku = [
+  { judul: "Laskar Pelangi", harga: 55000 },
+  { judul: "Komik Naruto", harga: 18000 },
+  { judul: "Bumi Manusia", harga: 85000 },
+  { judul: "Buku Tulis", harga: 15000 }
+];
+
+const bukuMahal = buku.filter(item => item.harga > 20000);
+
+console.log(bukuMahal);
+/* Output:
+[
+  { judul: "Laskar Pelangi", harga: 55000 },
+  { judul: "Bumi Manusia", harga: 85000 }
+]
+*/
+
+
+let buku = ["Laskar Pelangi", "Komik Naruto", "Bumi Manusia"];
+
+// 1. Hapus elemen terakhir ("Bumi Manusia")
+buku.pop();
+
+// 2. Tambahkan satu elemen di awal ("Filosofi Teras")
+buku.unshift("Filosofi Teras");
+
+console.log(buku);
+// Output: ["Filosofi Teras", "Laskar Pelangi", "Komik Naruto"]
+
+
+
+
+
+const nama = ["Andi", "Budi", "Citra", "Dewi", "Eko"];
+
+for (const item of nama) {
+  console.log(item);
+}
+
+/* Output:
+Andi
+Budi
+Citra
+Dewi
+Eko
+*/
